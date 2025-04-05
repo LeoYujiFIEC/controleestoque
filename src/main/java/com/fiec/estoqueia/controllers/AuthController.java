@@ -1,8 +1,7 @@
 package com.fiec.estoqueia.controllers;
 
-
-import com.fiec.estoqueia.business.dtos.LoginRequestDto;
-import com.fiec.estoqueia.business.entities.Usuarios;
+import com.fiec.estoqueia.business.dtos.AlunoLoginDto;
+import com.fiec.estoqueia.business.entities.Aluno;
 import com.fiec.estoqueia.services.AuthService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +21,12 @@ public class AuthController {
     AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@RequestBody LoginRequestDto loginRequest) {
-        log.info("AuthController - authenticateUser - Usuario entrando no sistema {}", loginRequest);
-        Optional<Usuarios> usuario = authService.authenticateUser(loginRequest.getEmail(), loginRequest.getSenha());
+    public ResponseEntity<?> authenticateUser(@RequestBody AlunoLoginDto alunoLoginDto) {
+        log.info("AuthController - authenticateUser - Aluno entrando no sistema {}", alunoLoginDto);
+        Optional<Aluno> aluno = authService.authenticateUser(alunoLoginDto.getRm(), alunoLoginDto.getSenha());
 
-        if (usuario.isPresent()) {
-            String token = authService.generateJwtToken(usuario.get().getId().toString(), usuario.get().getEmail());
+        if (aluno.isPresent()) {
+            String token = authService.generateJwtToken(aluno.get().getId().toString(), aluno.get().getRm());
             Map<String, String> response = new HashMap<>();
             response.put("token", token);
             return ResponseEntity.ok(response);

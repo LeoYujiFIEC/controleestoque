@@ -5,13 +5,13 @@ info:
 paths:
   /auth/login:
     post:
-      summary: Authenticate user and generate JWT token
+      summary: Authenticate aluno and generate JWT token
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LoginRequestDto'
+              $ref: '#/components/schemas/AlunoLoginDto'
       responses:
         '200':
           description: Successful authentication
@@ -31,7 +31,7 @@ paths:
                 type: string
     /auth/logout:
       delete:
-        summary: Logout user (invalidate token)
+        summary: Logout aluno (invalidate token)
         responses:
           '200':
             description: Logout successful
@@ -97,12 +97,11 @@ paths:
           description: Erro interno do servidor
 components:
   schemas:
-    LoginRequestDto:
+    AlunoLoginDto:
       type: object
       properties:
-        email:
+        rm:
           type: string
-          format: email
         senha:
           type: string
     CreateCategoriaDto:

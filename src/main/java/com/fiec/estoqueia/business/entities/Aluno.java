@@ -6,13 +6,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Document(collection = "usuarios")
-public class Usuarios {
+@Document(collection = "alunos")
+public class Aluno {
     @Id
     private ObjectId id;
-    private String nome;
-    private String email;
+    private String rm;
     private String senha;
-    private String perfil;
-    private Boolean ativo;
 }
